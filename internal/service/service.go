@@ -3,7 +3,7 @@ package service
 import (
 	"strings"
 
-	"github.com/yourproject/pkg/morse" // Импортируйте пакет morse
+	"6/pkg/morse" // Импортируйте пакет morse
 )
 
 // AutoConvert определяет, в каком виде передан текст (код Морзе или обычный текст),
