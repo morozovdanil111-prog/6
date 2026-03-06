@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"6sprint/6/internal/server"
+	"6sprint/internal/server"
 )
 
 func main() {
