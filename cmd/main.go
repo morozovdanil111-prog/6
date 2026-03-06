@@ -7,12 +7,11 @@ import (
 )
 
 func main() {
-	// Создаем логгер
-	logger := log.New()
+    // Создаем логгер
+    logger := log.New(os.Stdout, "", log.LstdFlags)
 
-	// Создаем сервер
-	srv := server.CreateServer(logger)
+    // Создаем сервер
+    srv := server.CreateServer(logger)
 
-	// Запускаем сервер
-	log.Fatal(srv.ListenAndServe())
-}
+    // Запускаем сервер
+    log.Fatal(srv.ListenAndServe())
