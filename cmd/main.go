@@ -15,3 +15,4 @@ func main() {
 
     // Запускаем сервер
     log.Fatal(srv.ListenAndServe())
+}
