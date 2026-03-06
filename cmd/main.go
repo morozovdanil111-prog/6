@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/server"
+	6/internal/server"
 )
 
 func main() {
