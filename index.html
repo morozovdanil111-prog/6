@@ -7,8 +7,12 @@
     <title>Document</title>
   </head>
   <body>
-    <form enctype="multipart/form-data" action="/upload" method="post">
-      <input type="file" name="file" />
+    <form
+      enctype="multipart/form-data"
+      action="/upload"  <!-- Путь на сервер -->
+      method="post"
+    >
+      <input type="file" name="file" />  <!-- имя файла должно быть "file" -->
       <input type="submit" value="upload" />
     </form>
   </body>
