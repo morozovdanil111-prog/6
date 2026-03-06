@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	6/internal/server"
+	"6/internal/server"
 )
 
 func main() {
