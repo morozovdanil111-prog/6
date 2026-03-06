@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"6sprint/handlers" // Путь к вашему пакету handlers
+	"6sprint/internal/handlers" 
 )
 
 // CreateServer создает HTTP-сервер с маршрутизатором
