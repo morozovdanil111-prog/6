@@ -3,7 +3,7 @@ package service
 import (
 	"strings"
 
-	"6sprint/6/pkg/morse" // Импортируйте пакет morse
+	"6sprint/pkg/morse" // Импортируйте пакет morse
 )
 
 // AutoConvert определяет, в каком виде передан текст (код Морзе или обычный текст),
