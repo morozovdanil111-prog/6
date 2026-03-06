@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"time"
-	"6/service" // Путь к вашему пакету service
+	"6sprint/6/service" // Путь к вашему пакету service
 )
 
 // RootHandler возвращает HTML-форму на корневой путь "/"
