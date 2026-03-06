@@ -5,17 +5,10 @@ import (
     "log"
     "net/http"
     "os"
-    "path/filepath"
     "time"
     "6sprint/internal/service" // Путь к вашему пакету service
 )
 
-// RootHandler возвращает HTML-форму на корневой путь "/"
-func RootHandler(w http.ResponseWriter, r *http.Request) {
-    http.ServeFile(w, r, "index.html")
-}
-
-// UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
     // Ограничение для парсинга данных формы
     r.ParseMultipartForm(10 << 20) // 10MB
