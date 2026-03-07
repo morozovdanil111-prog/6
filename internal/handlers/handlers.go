@@ -16,6 +16,8 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 
 // UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Starting upload handler")
+
 	// Ограничение для парсинга данных формы
 	err := r.ParseMultipartForm(10 << 20) // 10MB
 	if err != nil {
@@ -25,13 +27,15 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Получаем файл из формы
-	file, _, err := r.FormFile("file")
+	file, _, err := r.FormFile("file") // Имя должно быть "file"
 	if err != nil {
 		log.Printf("Error getting file: %v", err)
 		http.Error(w, "Error processing file", http.StatusInternalServerError)
 		return
 	}
 	defer file.Close()
+
+	log.Println("File received successfully")
 
 	// Читаем содержимое файла
 	fileContent, err := ioutil.ReadAll(file)
@@ -41,6 +45,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Printf("File content: %s", string(fileContent))
+
 	// Преобразуем данные с помощью функции AutoConvert
 	convertedContent, err := service.AutoConvert(string(fileContent))
 	if err != nil {
@@ -49,7 +55,9 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Генерация имени файла для записи (с расширением .txt)
+	log.Println("Conversion successful")
+
+	// Генерация имени файла для записи
 	fileName := time.Now().UTC().Format("2006-01-02_15-04-05") + ".txt"
 
 	// Запись в новый файл
@@ -68,6 +76,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error writing to file", http.StatusInternalServerError)
 		return
 	}
+
+	log.Printf("File written successfully to: %s", fileName)
 
 	// Возвращаем результат с HTTP статусом 200
 	w.WriteHeader(http.StatusOK)
