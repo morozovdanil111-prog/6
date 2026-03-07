@@ -15,8 +15,20 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
+package handlers
+
+import (
+	"io/ioutil"
+	"log"
+	"net/http"
+	"os"
+	"time"
+	"6sprint/internal/service" // Путь к вашему пакету service
+)
+
+// UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Starting upload handler")
+	log.Println("Starting to handle file upload...")
 
 	// Ограничение для парсинга данных формы
 	err := r.ParseMultipartForm(10 << 20) // 10MB
@@ -27,7 +39,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Получаем файл из формы
-	file, _, err := r.FormFile("file") // Имя должно быть "file"
+	file, _, err := r.FormFile("file") // Путь должен быть "file" согласно форме в HTML
 	if err != nil {
 		log.Printf("Error getting file: %v", err)
 		http.Error(w, "Error processing file", http.StatusInternalServerError)
