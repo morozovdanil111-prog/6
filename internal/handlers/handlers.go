@@ -14,7 +14,7 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "index.html")
 }
 
-// UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
+
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	// Ограничение для парсинга данных формы
 	err := r.ParseMultipartForm(10 << 20) // 10MB
@@ -24,8 +24,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Получаем файл из формы (имя поля 'myFile' соответствует тому, что в форме HTML)
-	file, _, err := r.FormFile("myFile")
+	// Получаем файл из формы
+	file, _, err := r.FormFile("myFile") // Путь должен быть "myFile"
 	if err != nil {
 		log.Printf("Error getting file: %v", err)
 		http.Error(w, "Error processing file", http.StatusInternalServerError)
@@ -69,7 +69,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Возвращаем результат с HTTP статусом 200 и возвращаем преобразованный контент
+	// Возвращаем результат с HTTP статусом 200, вместе с исходным текстом и кодом Морзе
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Conversion successful! Result saved to: " + fileName + "\n" + convertedContent))
+	w.Write([]byte("Conversion successful! Result saved to: " + fileName + "\n" + string(fileContent) + "\n" + convertedContent))
 }
