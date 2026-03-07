@@ -15,21 +15,7 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
-package handlers
-
-import (
-	"io/ioutil"
-	"log"
-	"net/http"
-	"os"
-	"time"
-	"6sprint/internal/service" // Путь к вашему пакету service
-)
-
-// UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Starting to handle file upload...")
-
 	// Ограничение для парсинга данных формы
 	err := r.ParseMultipartForm(10 << 20) // 10MB
 	if err != nil {
