@@ -24,8 +24,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Получаем файл из формы
-	file, _, err := r.FormFile("myFile") // имя поля в HTML
+	// Получаем файл из формы (имя поля 'myFile' соответствует тому, что в форме HTML)
+	file, _, err := r.FormFile("myFile")
 	if err != nil {
 		log.Printf("Error getting file: %v", err)
 		http.Error(w, "Error processing file", http.StatusInternalServerError)
@@ -71,5 +71,5 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Возвращаем результат с HTTP статусом 200
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Conversion successful! Result saved to: " + fileName + "\n" + convertedContent))
+	w.Write([]byte("Conversion successful! Result saved to: " + fileName))
 }
