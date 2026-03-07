@@ -69,7 +69,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Возвращаем результат с HTTP статусом 200
+	// Возвращаем результат с HTTP статусом 200 и возвращаем преобразованный контент
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Conversion successful! Result saved to: " + fileName))
+	w.Write([]byte("Conversion successful! Result saved to: " + fileName + "\n" + convertedContent))
 }
