@@ -1,20 +1,3 @@
-package handlers
-
-import (
-	"io/ioutil"
-	"log"
-	"net/http"
-	"os"
-	"time"
-	"6sprint/internal/service" // Путь к вашему пакету service
-)
-
-// RootHandler возвращает HTML-форму на корневой путь "/"
-func RootHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
-}
-
-// UploadHandler обрабатывает загрузку файла и конвертирует его содержимое
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	// Ограничение для парсинга данных формы
 	err := r.ParseMultipartForm(10 << 20) // 10MB
@@ -24,8 +7,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Получаем файл из формы с именем "myFile"
-	file, _, err := r.FormFile("myFile") // изменили на "myFile"
+	// Получаем файл из формы
+	file, _, err := r.FormFile("myFile") // имя поля в HTML
 	if err != nil {
 		log.Printf("Error getting file: %v", err)
 		http.Error(w, "Error processing file", http.StatusInternalServerError)
@@ -69,7 +52,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Возвращаем результат с HTTP статусом 200
+	// Возвращаем результат преобразования
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Conversion successful! Result saved to: " + fileName))
+	w.Write([]byte("Conversion successful! Result saved to: " + fileName + "\n" + convertedContent))
 }
